@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>侦听器</title>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <span>名:</span>
+            <span>
+                <input type="text" v-model="firstname">
+            </span>
+        </div>
+        <div>
+            <span>姓:</span>
+            <span>
+                <input type="text" v-model="lastname">
+            </span>
+        </div>
+        <div>
+            {{fullname}}
+        </div>
+    </div>
+
+    <script src="lib/vue.js"></script>
+    <script>
+        /**
+         * 计算属性具有缓存，而方法没有
+         * @type {Vue}
+         */
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                firstname: 'hello',
+                lastname: 'world',
+                fullname: 'hello world'
+            },
+            watch: {
+                //val当前的最新值
+                firstname: function (val) {
+                    this.fullname = val + '' + this.lastname;
+                },
+                lastname: function (val) {
+                    this.fullname = this.firstname + '' + val;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

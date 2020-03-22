@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>v-bind通过style绑定样式</title>
+</head>
+<body>
+    <div id="app">
+        <div v-bind:style="{border: borderStyle, width: widthStyle, height: heightStyle}"></div>
+        <buttion @click="handle">切换</buttion>
+    </div>
+
+    <script src="lib/vue.js"></script>
+    <script>
+        /**
+         * 样式绑定
+         * @type {Vue}
+         */
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                borderStyle: "1px solid blue",
+                widthStyle: "100px",
+                heightStyle: "100px"
+            },
+            methods: {
+                handle: function () {
+                    this.heightStyle = "50px";
+                }
+            }
+        })
+    </script>
+</body>
+</html>

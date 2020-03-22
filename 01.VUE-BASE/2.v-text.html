@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-text插值</title>
+</head>
+<body>
+<div id="app">
+    <!--v-cloak解决闪动问题-->
+    <p v-cloak>{{msg}}</p>
+    <!--v-text插值，不存在闪动-->v
+    <div v-text="msg"></div>
+    <!--v-html插入HTML片段-->
+    <div v-html="msg1"></div>
+    <!--v-pre显示原始的数据，不进行vue编译-->
+    <div v-pre="msg"></div>
+</div>
+<script src="lib/vue.js"></script>
+<script>
+    //创建一个vue的实例
+    var vm = new Vue({
+        el: '#app',
+        data: {  //data中存放的是el中需要用到的数据
+            msg: '最简单地Vue实践',
+            msg1: "<h1>5</h1>"
+        }
+    })
+</script>
+</body>
+</html>

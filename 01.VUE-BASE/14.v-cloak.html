@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="lib/vue.js"></script>
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <!--v-cloak解决闪动问题-->
+    <!--原理是先使用css隐藏标签，然后在内存中填充数据完毕后，再显示出来-->
+    <p v-cloak>{{msg}}</p>
+</div>
+<script>
+    //创建一个vue的实例
+    var vm = new Vue({
+        el: '#app',
+        data: {  //data中存放的是el中需要用到的数据
+            msg: '最简单地Vue实践'
+        }
+    })
+</script>
+</body>
+</html>

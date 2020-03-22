@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>v-bind</title>
+</head>
+<body>
+    <div id="app">
+        <a v-bind:href="url">百度</a>
+        <button @click="handle">切换</button>
+    </div>
+
+    <script src="lib/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                url: 'http://www.baidu.com'
+            },
+            methods: {
+                handle: function () {
+                    this.url = "https://www.bilibili.com/video/av50680998?p=213";
+                }
+            }
+        })
+    </script>
+</body>
+</html>

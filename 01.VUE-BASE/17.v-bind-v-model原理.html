@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>v-model原理</title>
+</head>
+<body>
+    <div id="app">
+        <div>{{msg}}</div>
+        <input type="text" v-bind:value="msg" @input="handle">
+        <input type="text" v-bind:value="msg" @input="msg=$event.target.value">
+    </div>
+<script src="lib/vue.js"></script>
+<script>
+    /**
+     * v-model的本质
+     * @type {Vue}
+     */
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'hello'
+        },
+        methods: {
+            handle: function (event) {
+                this.msg = event.target.value;
+            }
+        }
+    })
+</script>
+</body>
+</html>

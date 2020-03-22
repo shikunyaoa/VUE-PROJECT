@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>表单修饰符</title>
+</head>
+<body>
+    <div id="app">
+        <!--将结果转化为数值类型-->
+        <input type="text" v-model.number="age">
+        <!--去除前后空格-->
+        <input type="text" v-model.trim="info">
+        <!--将input事件转变成change事件,就是当input失去焦点的时候msg的值才会发生改变-->
+        <input type="text" v-model.lazy="msg">
+        <span>{{msg}}</span>
+        <button @click="handle">测试</button>
+    </div>
+
+    <script src="lib/vue.js"></script>
+    <script>
+        /**
+         * v-show的原理是设置元素的display
+         * @type {Vue}
+         */
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                age: '',
+                info: '',
+                msg: ''
+            },
+            methods: {
+                handle: function () {
+                    console.log(this.age + 13);
+                }
+            }
+        })
+    </script>
+</body>
+</html>
