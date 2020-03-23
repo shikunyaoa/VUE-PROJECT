@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>35.子组件向父组件传递信息</title>
+    <script src="lib/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div :style='{fontSize: fontSize + "px"}'>{{msg}}</div>
+        <!--静态传值-->
+        <button-counter title="父组件传值"></button-counter>
+        <!--动态传值-->
+        <button-counter title="父组件传值" :msg="msg"></button-counter>
+        <!--$event就是子组件传过来的值-->
+        <change-font @change-fonts="handle($event)"></change-font>
+    </div>
+    <script>
+
+        var buttons = {
+            props: ['title', 'msg'],
+            data: function () {
+                return {
+                    count: 0
+                }
+            },
+            template: '<button @click="handle">被点击了{{count + " "+ title + " " + msg}}次 </button>',
+            methods: {
+                handle: function () {
+                    this.count++;
+                }
+            }
+        }
+
+        var changeFont = {
+            template: `<button @click='$emit("change-fonts", 10)'>字体变大</button>`
+        }
+
+        var vm = new Vue({
+            el: '#app',
+            data: {  //data中存放的是el中需要用到的数据
+                msg: '最简单地Vue实践',
+                fontSize: 10
+            },
+            methods: {
+                handle: function (val) {
+                    this.fontSize += val;
+                }
+            },//局部组件只能在父组件中使用
+            components: {
+                "button-counter": buttons,
+                "change-font": changeFont
+            }
+        })
+    </script>
+</body>
+</html>
