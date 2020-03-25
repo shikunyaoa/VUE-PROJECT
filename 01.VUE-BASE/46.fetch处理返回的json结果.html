@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>46.fetch处理返回的json结果</title>
+</head>
+<body>
+
+<script type="text/javascript">
+
+    fetch("http://www.baidu.com",{
+        method: 'get',
+        body: JSON.stringify({
+            "username": "xixi",
+            "password": "123456"
+        }),
+        headers: {
+            'Content-type': 'application/json'
+        }
+    }).then(function (data) {
+        //处理返回的json数据，类似JSON.parse()
+        return data.json();
+    }).then(function (data) {
+        console.log(data);
+    })
+</script>
+</body>
+</html>

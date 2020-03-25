@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>43.promise常用api-对象方法</title>
+</head>
+<body>
+
+<script type="text/javascript">
+    function func(){
+        return new Promise(function(resolve, reject){
+            // 这里用于实现异步任务
+            setTimeout(function(){
+                var flag = false;
+                if(flag) {
+                    // 正常情况
+                    resolve('hello');
+                }else{
+                    // 异常情况
+                    reject('出错了');
+                }
+            }, 100);
+        });
+    }
+
+   var p1 = func();
+    var p2 = func();
+    var p3 = func();
+    //所有都执行完，才返回结果
+    Promise.all([p1, p2, p3]).then(function (data) {
+        console.log(data);
+    })
+
+    //只要有一个成功执行，返回最先执行完成的那个的结果
+    Promise.race([p1, p2, p3]).then(function (data) {
+        console.log(data);
+    })
+</script>
+</body>
+</html>

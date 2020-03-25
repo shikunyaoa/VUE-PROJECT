@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>47.axios基本使用</title>
+</head>
+<body>
+
+<script type="text/javascript">
+
+    //axios全局配置
+    //设置基础URL
+    axios.defaults.baseURL = "http://www.baidu.com";
+    //设置请求头
+    axios.defaults.headers['Authorization'] = "Barear ";
+    axios.get("http://www.baidu.com").then(function (ret) {
+        //data才是最终结果
+           console.log(ret.data);
+    })
+
+    //get方法传参
+    axios.get("http://www.baidu.com",{
+        params: {
+            id: 1
+        }
+    }).then(function (ret) {
+        //data才是最终结果
+        console.log(ret.data);
+    })
+
+
+    //post方法传参,默认是json形式
+    axios.post("http://www.baidu.com",{
+        params: {
+            id: 1
+        }
+    }).then(function (ret) {
+        //data才是最终结果
+        console.log(ret.data);
+    })
+
+
+    //post方法传参,表单传参
+    var params = new URLSearchParams();
+    params.append('id', 1);
+    axios.post("http://www.baidu.com",params).then(function (ret) {
+        //data才是最终结果
+        console.log(ret.data);
+    })
+
+    //axios请求拦截器
+    axios.intercepts.request.use(function (config) {
+        config.headers.mytoken = 'nihao';
+        return config;
+    }, function (error) {
+        console.log(error)
+    })
+
+    //响应拦截器
+    axios.intercepts.response.use(function (res) {
+        console.log(data);
+        return res.data;
+    }, function (error) {
+        console.log(error)
+    })
+</script>
+</body>
+</html>

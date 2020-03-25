@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>48.async-await</title>
+</head>
+<body>
+
+<script type="text/javascript">
+
+    //顺序执行
+    async function queryData() {
+        var res = await axios.get('http://www.baidu.com');
+        var ress = await axios.get('http://www.baidu.com?res=' + res);
+        return ress;
+    }
+    queryData().then(function (data) {
+        console.log(data);
+    })
+</script>
+</body>
+</html>

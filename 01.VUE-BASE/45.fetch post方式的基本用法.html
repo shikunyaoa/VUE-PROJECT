@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>45.fetch post方式的基本用法</title>
+</head>
+<body>
+
+<script type="text/javascript">
+
+    fetch("http://www.baidu.com",{
+        method: 'get',
+        body: JSON.stringify({
+            "username": "xixi",
+            "password": "123456"
+        }),
+        headers: {
+            'Content-type': 'application/json'
+        }
+    }).then(function (data) {
+        //返回的是promise对象，而不是具体的值
+        return data.text();
+    }).then(function (data) {
+        console.log(data);
+    })
+</script>
+</body>
+</html>
