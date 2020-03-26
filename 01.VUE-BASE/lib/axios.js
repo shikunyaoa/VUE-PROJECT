@@ -862,7 +862,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function getDefaultAdapter() {
 	  var adapter;
-	  // Only Node.JS has a process variable that is of [[Class]] process
+	  // Only Node.js has a process variable that is of [[Class]] process
 	  if (typeof process !== 'undefined' && Object.prototype.toString.call(process) === '[object process]') {
 	    // For node use HTTP adapter
 	    adapter = __webpack_require__(13);

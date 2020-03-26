@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <!-- 导入 vue 文件 -->
+    <script src="./js/vue_2.5.22.js"></script>
+    <script src="./js/vue-router_3.0.2.js"></script>
+</head>
+<body>
+<!-- 被 vm 实例所控制的区域 -->
+<div id="app">
+    <router-link to="/user/1">User</router-link>
+    <router-link to="/user/2">User</router-link>
+    <router-link to="/user/3">User</router-link>
+    <router-link to="/user/4">User</router-link>
+    <!-- 路由占位符 -->
+    <router-view/>
+</div>
+
+<script>
+    const User = {
+        props: ['id','name', 'age'],
+        template: '<h1>{{name + "-----"+ age + "-----" + id}}</h1>'
+    }
+
+    const Register = {
+        template: `<div>
+          <h1>Register 组件</h1>
+          <hr/>
+        <router-link to="/register/tab1">tab1</router-link>
+        <router-link to="/register/tab2">tab2</router-link>
+
+        <router-view />
+        </div>`
+    }
+
+    const Tab1 = {
+        template: '<h1>tab1 组件</h1>'
+    }
+
+    const Tab2 = {
+        template: '<h1>tab2 组件</h1>'
+    }
+    // 创建路由实例对象
+    const router = new VueRouter({
+        // 所有的路由规则
+        routes: [
+            { path: '/', redirect: '/user'},
+            //{ path: '/user/:id', component: User, props: true},
+            //传递对象，对象有什么，才能传递什么
+            // { path: '/user/:id', component: User, props: {'name': 'lisi', 'age': 134}},
+            //结合使用
+            { path: '/user/:id', component: User, props: route =>({'name': 'lisi', 'age': 134, id: route.params.id})},
+            { path: '/register', component: Register,
+                //子路由规则
+            children: [
+                {path: '/register/tab1', component: Tab1},
+                {path: '/register/tab2', component: Tab2}
+            ]}
+        ]
+    })
+
+    // 创建 vm 实例对象
+    const vm = new Vue({
+        // 指定控制的区域
+        el: '#app',
+        data: {},
+        // 挂载路由实例对象
+        // router: router
+        router
+    })
+</script>
+</body>
+</html>
