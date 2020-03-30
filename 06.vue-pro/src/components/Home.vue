@@ -19,6 +19,10 @@
           router
           :default-active="activePath">
           <div class="toggle-button" @click="toggleCollapse">|||</div>
+          <el-menu-item index="/home">
+            <i class="el-icon-menu"></i>
+            <span slot="title">首页</span>
+          </el-menu-item>
           <el-submenu :index="item.id + ''" v-for="item in menuList" :key="item.id">
             <template slot="title">
               <i class="el-icon-location"></i>
@@ -101,7 +105,7 @@ export default {
     }
   }
   .el-main{
-    background-color: #ADD8E6;
+    background-color: #fff;
   }
   .toggle-button{
     background-color: #4a5064;
