@@ -55,9 +55,9 @@
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
-    <el-button @click="addCatedialogVisible = false">取 消</el-button>
-    <el-button type="primary" @click="addCate">确 定</el-button>
-  </span>
+        <el-button @click="addCatedialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="addCate">确 定</el-button>
+      </span>
     </el-dialog>
   </div>
 </template>
@@ -161,7 +161,7 @@ export default {
         if (ret.meta.status !== 201) {
           return this.$message.error('添加分类失败')
         }
-        this.$message.success('添加分类失败')
+        this.$message.success('添加分类成功')
         this.getCategoryList()
         this.addCatedialogVisible = false
       })
