@@ -73,7 +73,7 @@
             <quill-editor
               v-model="addForm.goods_introduce"
             />
-            <el-button type="primary" class="btn_add">添加商品</el-button>
+            <el-button type="primary" class="btn_add" @click="addPro">添加商品</el-button>
           </el-tab-pane>
 
         </el-tabs>
@@ -90,6 +90,7 @@
 </template>
 
 <script>
+import _ from 'loadsh'
 export default {
   name: 'Add',
   data () {
@@ -102,7 +103,8 @@ export default {
         goods_weight: 0,
         goods_cat: [],
         pics: [],
-        goods_introduce: ''
+        goods_introduce: '',
+        attrs: []
       },
       addFormRules: {
         goods_name: [
@@ -208,6 +210,36 @@ export default {
     handleSuccess (response) {
       const ret = { pic: response.data.tmp_path }
       this.addForm.pics.push(ret)
+    },
+    addPro () {
+      this.$refs.addFormRef.validate(async valid => {
+        if (!valid) {
+          return this.$message.error('请填写必要的数据')
+        }
+        const form = _.cloneDeep(this.addForm)
+        this.manyTableData.forEach(item => {
+          const attr = {
+            attr_id: item.attr_id,
+            attr_value: item.attr_vals.join(' ')
+          }
+          this.addForm.attrs.push(attr)
+        })
+        this.onlyTableData.forEach(item => {
+          const attr = {
+            attr_id: item.attr_id,
+            attr_value: item.attr_vals
+          }
+          this.addForm.attrs.push(attr)
+        })
+        form.attrs = this.addForm.attrs
+        form.goods_cat = form.goods_cat.join(',')
+        const { data: ret } = await this.$http.post('goods', form)
+        if (ret.meta.status !== 201) {
+          return this.$message.error('添加商品失败')
+        }
+        this.$message.success('添加商品成功')
+        this.$router.push('/goods')
+      })
     }
   },
   computed: {
